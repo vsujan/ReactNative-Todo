@@ -1,28 +1,33 @@
 import * as types from './types';
+import todos from './todos.json';
 
 export function addNewTodo(todo) {
-  return (dispatch)
-  {
+  return dispatch => {
     dispatch(todoList(todo));
   }
 }
 
 export function updateTodo(todo) {
-  return (dispatch)
-  {
+  return dispatch => {
     dispatch(todoList(todo));
   }
 }
 
 export function deleteTodo(todo) {
-  return (dispatch)
-  {
+  return dispatch => {
     dispatch(todoList(todo))
   }
 }
 
+export function fetchTodos() {
+  console.log('From action: ', todos);
+  return dispatch => {
+    dispatch(todoList(todos))
+  }
+}
 
-export const todoList = todos => {
+
+const todoList = (todos) => {
   return {
     type: types.TODO_LIST,
     data: todos
