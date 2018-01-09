@@ -3,7 +3,7 @@ import createReducer from '../lib/createReducer';
 
 export const todoList = createReducer({}, {
   [types.TODO_LIST](state, action) {
-    if (action.todos) {
+    if (action.data) {
       return action.data;
     }
 

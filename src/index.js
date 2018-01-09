@@ -5,7 +5,8 @@ import { createLogger } from 'redux-logger';
 import { createStore, compose, applyMiddleware } from 'redux';
 
 import reducer from './reducers';
-import MainScreen from './screens';
+// import AppContainer from './screens';
+import AppContainer from './screens/todo/todoContainer';
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 const store = configureStore({});
@@ -24,7 +25,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <Provider store={store}>
-        <MainScreen/>
+        <AppContainer/>
       </Provider>
     )
   }
