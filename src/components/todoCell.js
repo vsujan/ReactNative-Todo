@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Image,
   StyleSheet
 } from 'react-native';
 
@@ -13,10 +14,17 @@ const TodoCell = props => {
         <Text>{props.item.description}</Text>
       </View>
       <View style={styles.indicatorWrapper}>
-        <Text>{props.item.completed ? '1' : '0'}</Text>
+        {!props.item.completed &&
+        (
+          <Image source={_getImageUri('check_greenBg.png')} style={{width: 22, height: 22}}/>
+        )}
       </View>
     </View>
   )
+};
+
+const _getImageUri = src => {
+  return { uri: src };
 };
 
 const styles = StyleSheet.create({
