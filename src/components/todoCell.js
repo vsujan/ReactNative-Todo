@@ -17,18 +17,11 @@ const TodoCell = props => {
       <View style={styles.indicatorWrapper}>
         {!props.item.completed &&
         (
-          <Image source={_getImageUri('check_greenBg.png')} style={{width: 22, height: 22, backgroundColor: 'red'}}/>
+          <Image source={require('../assets/images/check_greenBg.png')} style={{width: 22, height: 22}}/>
         )}
       </View>
     </View>
   )
-};
-
-const _getImageUri = src => {
-  if (Platform.OS === 'android') {
-    return { uri: `assets_images_${src}` };
-  }
-  return { uri: src };
 };
 
 const styles = StyleSheet.create({
