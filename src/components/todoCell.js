@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Platform,
   StyleSheet
 } from 'react-native';
 
@@ -16,7 +17,7 @@ const TodoCell = props => {
       <View style={styles.indicatorWrapper}>
         {!props.item.completed &&
         (
-          <Image source={_getImageUri('check_greenBg.png')} style={{width: 22, height: 22}}/>
+          <Image source={_getImageUri('check_greenBg.png')} style={{width: 22, height: 22, backgroundColor: 'red'}}/>
         )}
       </View>
     </View>
@@ -24,6 +25,9 @@ const TodoCell = props => {
 };
 
 const _getImageUri = src => {
+  if (Platform.OS === 'android') {
+    return { uri: `assets_images_${src}` };
+  }
   return { uri: src };
 };
 
