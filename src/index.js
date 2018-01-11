@@ -1,31 +1,47 @@
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import React, { Component } from 'react';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { Text } from 'react-native';
+import { configureStore } from './store';
+import { Router, Scene, Actions } from 'react-native-router-flux';
+import todoList from './screens/todo/todosContainer';
+import addTodo from './screens/todo/addTodoContainer';
 
-import reducer from './reducers';
-// import AppContainer from './screens';
-import AppContainer from './screens/todo/todoContainer';
-
-const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 const store = configureStore({});
+const RouterWithRedux = connect()(Router);
 
-function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(
-      thunkMiddleware, // lets us dispatch() functions
-      loggerMiddleware
-    )
-  );
-  return createStore(reducer, initialState, enhancer);
+const RightIcon = () => {
+  return (
+    <Text style={{ color: 'gray' }}>ADD</Text>
+  )
+};
+
+const _addTodo = () => {
+  Actions.addTodo();
 }
 
 export default class App extends Component<{}> {
   render() {
     return (
       <Provider store={store}>
-        <AppContainer/>
+        <RouterWithRedux>
+          <Scene key="root">
+            <Scene
+              key="todoList"
+              component={todoList}
+              title="Todo List"
+              // navigationBarStyle = {styles.header}
+              // titleStyle = {styles.text}
+              onRight={_addTodo}
+              rightTitle={RightIcon}
+              initial
+            />
+            <Scene
+              key="addTodo"
+              component={addTodo}
+              title="Add Todo"
+            />
+          </Scene>
+        </RouterWithRedux>
       </Provider>
     )
   }

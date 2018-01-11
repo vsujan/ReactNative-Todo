@@ -1,4 +1,4 @@
-import todo from './todo';
+import todo from './todos';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions';
 
